@@ -5,11 +5,7 @@ import { For, Reactive } from "@legendapp/state/react";
 import { enableReactComponents } from "@legendapp/state/config/enableReactComponents";
 
 enableReactComponents();
-console.log("rernder outside app");
-
 export default function App() {
-  console.log("rernder inside app");
-
   const handleAddTodo = () => {
     state.todos.push({
       id: crypto.randomUUID(),
