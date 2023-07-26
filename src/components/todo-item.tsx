@@ -1,6 +1,7 @@
 import { state } from "../store/todo";
 import { Status, Todo } from "../types/todo";
 import { Reactive } from "@legendapp/state/react";
+import TodoStatus from "./todo-status";
 
 export default function TodoItem({ todo }: { todo: Todo | undefined }) {
   return (
@@ -17,33 +18,11 @@ export default function TodoItem({ todo }: { todo: Todo | undefined }) {
         {todo?.text}
 
         <div className="card-actions flex gap-2">
-          <select
-            className="select flex-1 select-sm select-bordered"
-            value={todo?.status}
-            onChange={(e) =>
-              state.todos.set((todos) =>
-                todos.map((todo) => {
-                  if (todo.id === todo.id) {
-                    return {
-                      ...todo,
-                      status: e.target.value as Status,
-                    };
-                  }
-                  return todo;
-                })
-              )
-            }
-          >
-            <option value={Status.Initialized}>Initialized</option>
-            <option value={Status.Progress}>Progress</option>
-            <option value={Status.Done}>Done</option>
-          </select>
+          <TodoStatus id={todo?.id} status={todo?.status} />
 
           <button
             onClick={() =>
-              state.todos.set((todos) =>
-                todos.filter((todo) => todo.id !== todo.id)
-              )
+              state.todos.set((todos) => todos.filter((t) => t.id !== todo?.id))
             }
             className="btn btn-error btn-sm"
           >
