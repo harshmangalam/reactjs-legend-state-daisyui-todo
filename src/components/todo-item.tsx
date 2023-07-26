@@ -4,6 +4,9 @@ import { Reactive } from "@legendapp/state/react";
 import TodoStatus from "./todo-status";
 
 export default function TodoItem({ todo }: { todo: Todo | undefined }) {
+  const handleRemoveTodo = () => {
+    state.todos.set((todos) => todos.filter((t) => t.id !== todo?.id));
+  };
   return (
     <Reactive.article
       $className={
@@ -20,12 +23,7 @@ export default function TodoItem({ todo }: { todo: Todo | undefined }) {
         <div className="card-actions flex gap-2">
           <TodoStatus id={todo?.id} status={todo?.status} />
 
-          <button
-            onClick={() =>
-              state.todos.set((todos) => todos.filter((t) => t.id !== todo?.id))
-            }
-            className="btn btn-error btn-sm"
-          >
+          <button onClick={handleRemoveTodo} className="btn btn-error btn-sm">
             Remove
           </button>
         </div>

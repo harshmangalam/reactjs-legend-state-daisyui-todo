@@ -8,23 +8,24 @@ export default function TodoStatus({
   id: string | undefined;
   status: Status | undefined;
 }) {
+  const handleChangeStatus = (status: Status) => {
+    state.todos.set((todos) =>
+      todos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            status,
+          };
+        }
+        return todo;
+      })
+    );
+  };
   return (
     <select
       className="select flex-1 select-sm select-bordered"
       value={status}
-      onChange={(e) =>
-        state.todos.set((todos) =>
-          todos.map((todo) => {
-            if (todo.id === id) {
-              return {
-                ...todo,
-                status: e.target.value as Status,
-              };
-            }
-            return todo;
-          })
-        )
-      }
+      onChange={(e) => handleChangeStatus(e.target.value as Status)}
     >
       <option value={Status.Initialized}>Initialized</option>
       <option value={Status.Progress}>Progress</option>

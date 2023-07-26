@@ -5,6 +5,7 @@ import { For, Reactive, useObservable } from "@legendapp/state/react";
 import { enableReactComponents } from "@legendapp/state/config/enableReactComponents";
 
 enableReactComponents();
+
 export default function App() {
   const input = useObservable("");
   const handleAddTodo = () => {
